@@ -3,7 +3,7 @@
         <div class="content">
             <?php $contentString = $searchResultArray[$i]["sentences"] ?>
             <p><?php echo nl2br($contentString) ?></p>
-            <p><?php require("previewPageFiller.php") ?></p>
+            <p><?php require("detailPageFiller.php") ?></p>
         </div>
         <br>
     <?php endfor ?> <br>
