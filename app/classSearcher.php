@@ -36,7 +36,6 @@ class Searcher
         $SQLLatterPart = "";
         $count = 1;
         foreach ($searchWords->getWords() as $word) {
-            // タイトル検索、本文検索
             $SQLLatterPart .= "sentences LIKE :word$count OR ";
             $count++;
         }
