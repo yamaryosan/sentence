@@ -1,0 +1,7 @@
+config/
+images/
+uploads/
+# インデックスからのみファイルを削除し、追跡対象から外す
+git rm --cached config/
+git rm --cached images/
+git rm --cached uploads/
