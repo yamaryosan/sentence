@@ -1,19 +1,36 @@
-window.onscroll = function () {
-  scrollFunction();
-};
+const toTopButton = document.querySelector(".to_top_btn");
+const buttonAppearScrollAmount = 400;
+const buttonOpacityMaxScrollAmount = 800;
+const opacityMin = 0;
+const opacityMax = 0.2;
+const displacementX = buttonOpacityMaxScrollAmount - buttonAppearScrollAmount;
+const displacementY = opacityMax - opacityMin;
+const slope = displacementY / displacementX;
+const intercept = -slope * buttonAppearScrollAmount;
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    topBtn.style.display = "block";
+/* 不透明度を計算する　*/
+function calcOpacity(x) {
+  if (x > buttonOpacityMaxScrollAmount) {
+    return opacityMax;
   } else {
-    topBtn.style.display = "none";
+    return slope * x + intercept;
   }
 }
 
-function topFunction() {
+window.onscroll = function () {
+  if (
+    document.body.scrollTop > buttonAppearScrollAmount ||
+    document.documentElement.scrollTop > buttonAppearScrollAmount
+  ) {
+    toTopButton.style.opacity = calcOpacity(document.documentElement.scrollTop);
+    console.log(toTopButton.style.opacity);
+    toTopButton.style.display = "flex";
+  } else {
+    toTopButton.style.display = "none";
+  }
+};
+
+toTopButton.addEventListener("click", function () {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
-}
-
-const topBtn = document.querySelector(".to_top_btn");
-topBtn.addEventListener("click", topFunction);
+});

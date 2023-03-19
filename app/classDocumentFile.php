@@ -26,7 +26,7 @@ class DocumentFile
     // ファイルがすでにアップロードされているか確認する
     public function isPreviouslyUploadedCheck()
     {
-        $config = require("../config/config.php");
+        $config = require("./../config.php");
 
         $host = $config["database"]["host"];
         $db = $config["database"]["database"];
@@ -90,7 +90,7 @@ class DocumentFile
     // アップロードされたファイル名をDBに保存
     public function uploadHistory()
     {
-        $config = require("config.php");
+        $config = require("./../config.php");
 
         $host = $config["database"]["host"];
         $db = $config["database"]["database"];
@@ -120,7 +120,7 @@ class DocumentFile
         // 一意なIDを付与した新しい名前でアップロード
         $newName = uniqid("", true) . ".docx";
         $currentDirectory = "./";
-        $uploadDirectory = "../uploads";
+        $uploadDirectory = "uploads";
         $fileDestination = $currentDirectory . $uploadDirectory . "/" . $newName;
         if (move_uploaded_file($this->tempName, $fileDestination)) {
             $message = "ドキュメントファイル アップロード成功";

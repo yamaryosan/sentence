@@ -7,10 +7,10 @@ require_once("./app/classDataSaver.php");
 header("Cache-Control: no-cache, must-revalidate");
 
 // アップロードを受け付ける
-if (isset($_FILES["uploaded-file"]) === true) {
-    $uploader = new Uploader($_FILES["uploaded-file"]);
+if (isset($_FILES["uploaded_file"]) === true) {
+    $uploader = new Uploader($_FILES["uploaded_file"]);
     $uploader->upload();
-    $pythonFileName = "./docx_to_text.py";
+    $pythonFileName = "./app/docx_to_txt.py";
     // pyファイルを実行してドキュメントファイルをテキストファイルに変換
     exec("python " . $pythonFileName . " 2>&1", $output, $state);
     if ($state !== 0) {
@@ -31,15 +31,16 @@ if (isset($_FILES["uploaded-file"]) === true) {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style-upload.css">
+    <link rel="stylesheet" href="style_upload.css">
 </head>
 
 <body>
-    <form action="uploadPage.php" method="post" enctype="multipart/form-data">
-        <input type="file" class="file-dropzone" name="uploaded-file">
+    <form action="upload" method="post" enctype="multipart/form-data">
+        <input type="file" class="file_dropzone" name="uploaded_file">
         <input type="submit" class="submit-btn" value="アップロード">
     </form>
-    <button onclick="location.href='searchPage.php'">検索ページへ移動</button>
+    <a href="top.php">戻る</a>
+    <a href="delete.php">DB削除</a>
 </body>
 
 </html>

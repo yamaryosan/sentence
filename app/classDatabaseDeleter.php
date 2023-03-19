@@ -2,18 +2,15 @@
 
 /**
  * データベースを削除するクラス
- * @param string $sentenceTableName 知識ユニットテーブル名
- * @param string $filenameTableName ファイルテーブル名
+ * @param string $sentenceTableName 文章テーブル名
  */
 class DatabaseDeleter
 {
     private string $sentenceTableName;
-    private string $filenameTableName;
 
-    public function __construct(string $sentenceTableName, string $filenameTableName)
+    public function __construct(string $sentenceTableName)
     {
         $this->sentenceTableName = $sentenceTableName;
-        $this->filenameTableName = $filenameTableName;
     }
     public function delete()
     {
@@ -32,7 +29,7 @@ class DatabaseDeleter
             unset($dbh);
             die();
         }
-        $statement = $dbh->prepare("DROP TABLE IF EXISTS $this->sentenceTableName, $this->filenameTableName");
+        $statement = $dbh->prepare("DROP TABLE IF EXISTS $this->sentenceTableName");
         $statement->execute();
     }
     public function message()

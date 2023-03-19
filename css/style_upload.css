@@ -1,0 +1,10 @@
+.file_dropzone {
+    border: 2px dashed #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+/* typeにfileを指定しているので、submitも装飾されるということがない */
+.file_dropzone input[type="file"] {
+    display: none;
+}

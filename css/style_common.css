@@ -67,7 +67,8 @@ h3 {
     align-items: center;
 }
 
-footer p {
+footer {
     display: flex;
     justify-content: flex-end;
+    flex-direction: column;
 }
