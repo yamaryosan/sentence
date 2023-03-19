@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once("../app/class/classUploader.php");
-require_once("../app/class/classDataSaver.php");
+require_once("./app/classUploader.php");
+require_once("./app/classDataSaver.php");
 
 header("Cache-Control: no-cache, must-revalidate");
 
@@ -20,7 +20,7 @@ if (isset($_FILES["uploaded-file"]) === true) {
         echo "変換成功" . PHP_EOL;
     }
     // テキストファイルを読み取って保存
-    $dataSaver = new DataSaver("../uploads/uploadedTextFile.txt");
+    $dataSaver = new DataSaver("./uploads/uploadedTextFile.txt");
     $dataSaver->save();
 }
 
