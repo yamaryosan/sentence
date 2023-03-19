@@ -35,7 +35,7 @@ if (count($searchResultArray) > $requestRetryHitNumber) {
     <meta charset="utf-8">
     <title>プレビュー</title>
     <link rel="stylesheet" href="./css/style_common.css">
-    <link rel="stylesheet" href="./css/style_preview.css">
+    <link rel="stylesheet" href="./css/style_detail.css">
     <link rel="stylesheet" href="./css/style_side_column.css">
 </head>
 
