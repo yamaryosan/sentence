@@ -10,7 +10,7 @@ header("Cache-Control: no-cache, must-revalidate");
 if (isset($_FILES["uploaded-file"]) === true) {
     $uploader = new Uploader($_FILES["uploaded-file"]);
     $uploader->upload();
-    $pythonFileName = "../docx_to_text.py";
+    $pythonFileName = "./docx_to_text.py";
     // pyファイルを実行してドキュメントファイルをテキストファイルに変換
     exec("python " . $pythonFileName . " 2>&1", $output, $state);
     if ($state !== 0) {
