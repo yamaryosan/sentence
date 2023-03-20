@@ -62,7 +62,7 @@ class DocumentFile
     // 拡張子チェック
     public function extensionCheck()
     {
-        if (in_array($this->extension, ["docx"]) === false) {
+        if (in_array($this->extension, ["docx", "txt"]) === false) {
             $message = "ファイルのタイプが間違っています。 : " . $this->extension;
             echo $message . PHP_EOL;
             die();
@@ -118,7 +118,7 @@ class DocumentFile
     public function move()
     {
         // 一意なIDを付与した新しい名前でアップロード
-        $newName = uniqid("", true) . ".docx";
+        $newName = "uploadedDocxFile.docx";
         $currentDirectory = "./";
         $uploadDirectory = "uploads";
         $fileDestination = $currentDirectory . $uploadDirectory . "/" . $newName;
