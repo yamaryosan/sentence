@@ -17,29 +17,40 @@ class DocxToTxtConverter
         $this->txtFilePath = $txtFilePath;
     }
 
-    public function getTextFromDocx(string $filePath): string
+    public function convert(): void
     {
         $zip = new ZipArchive;
-        $result = "";
 
-        if ($zip->open($filePath) === true) {
+        if ($zip->open($this->docxFilePath) === true) {
             $documentXml = $zip->getFromName("word/document.xml");
             if ($documentXml) {
                 $domDocument = new DOMDocument();
                 $domDocument->loadXML($documentXml);
                 $paragraphs = $domDocument->getElementsByTagName("p");
                 /** @var DOMNode $paragraph */
+                $result = "";
+                // プログレスバーの表示
+                echo "<progress id='progress_bar' value='0' max='100'></progress>";
+                echo "<span id='progress_value'>0%</span>";
+                echo "<script>
+                const bar = document.querySelector('#progress_bar');
+                const progress_value = document.querySelector('#progress_value');
+                </script>";
+                $count = 0;
+                $maxProgressValue = $paragraphs->length;
+                $currentProgressValue = 0;
                 foreach ($paragraphs as $paragraph) {
-                    $result .= $paragraph->textContent;
+                    $result .= $paragraph->textContent . PHP_EOL;
+                    $currentProgressValue = (int)($count / $maxProgressValue * 100);
+                    // プログレスバーの進捗を変更
+                    echo "<script>
+                    bar.value = $currentProgressValue;
+                    progress_value.textContent = $currentProgressValue + '%';
+                    </script>";
+                    $count++;
                 }
+                file_put_contents($this->txtFilePath, $result . PHP_EOL, FILE_APPEND);
             }
         }
-        return $result . "\n";
-    }
-
-    public function convert(): void
-    {
-        $txt = ($this->docxFilePath);
-        file_put_contents($this->txtFilePath, $txt);
     }
 }
