@@ -46,6 +46,9 @@ $articleDisplayCount = 10;
                 </a>
             </div>
         </main>
+        <footer>
+            <p>© programmingnokemono <?php echo date("Y") ?></p>
+        </footer>
     </div>
 </body>
 
