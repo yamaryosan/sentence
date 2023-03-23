@@ -39,6 +39,8 @@ class DocxToTxtConverter
                 $count = 0;
                 $maxProgressValue = $paragraphs->length;
                 $currentProgressValue = 0;
+                $result = "";
+                $chunkSize = 1024 * 1024; // 1MB
                 foreach ($paragraphs as $paragraph) {
                     $result .= $paragraph->textContent . PHP_EOL;
                     $currentProgressValue = (int)($count / $maxProgressValue * 100);
@@ -48,8 +50,14 @@ class DocxToTxtConverter
                     progress_value.textContent = $currentProgressValue + '%';
                     </script>";
                     $count++;
+                    if (strlen($result) > $chunkSize) {
+                        file_put_contents($this->txtFilePath, $result, FILE_APPEND);
+                        $result = "";
+                    }
                 }
-                file_put_contents($this->txtFilePath, $result . PHP_EOL, FILE_APPEND);
+                if (strlen($result) > 0) {
+                    file_put_contents($this->txtFilePath, $result, FILE_APPEND);
+                }
             }
         }
     }
