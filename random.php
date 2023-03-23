@@ -6,6 +6,7 @@ require_once("./app/classRandomSentenceGetter.php");
 header("Cache-Control: no-cache, must-revalidate");
 
 $randomSentenceGetter = new RandomKnowledgeUnitGetter();
+$articleDisplayCount = 10;
 ?>
 
 <!DOCTYPE html>
@@ -29,10 +30,10 @@ $randomSentenceGetter = new RandomKnowledgeUnitGetter();
         <main>
             <div class="main_column">
                 <div class="content_container">
-                    <?php for ($i = 0; $i <= 4; $i++) : ?>
+                    <?php for ($i = 0; $i < $articleDisplayCount; $i++) : ?>
                         <h3>二つの参照方式</h3>
                         <p><?php echo nl2br($randomSentenceGetter->get()) ?></p>
-                        <?php require("./app/previewPagefiller.php") ?>
+                        <?php require("./app/previewPageFiller.php") ?>
                     <?php endfor ?>
                 </div>
             </div>
