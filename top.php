@@ -32,7 +32,6 @@ declare(strict_types=1);
         </main>
         <footer>
             <p>© programmingnokemono <?php echo date("Y") ?></p>
-            <a href="upload">アップロード</a>
         </footer>
     </div>
     <?php if (empty($_POST["search_word"])) : ?>
